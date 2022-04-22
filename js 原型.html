@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>任何函数都有prototype属性，prototype为原型的意思</p>
+    <p>prototype属性值是个对象，constructor属性指回函数</p>
+    <p>普通的函数的prototype属性没有任何用处 但构造函数却有大用处</p>
+    <p>构造函数的prototype的属性是他的实例的原型</p>
+
+    <p>原型链查找</p>
+    <p>实例可以打点访问他的原型的属性和方法 称之为原型链查找</p>
+    <p>原型链遮蔽效应 如果一个实例上本来就有某种属性 查找时就是这个属性的值 就不会去原型链上查找</p>
+
+
+    <p>hasOwnProperty 该方法可以检测对象自己是否真正有某种属性或方法</p>
+
+    <p>in 操作符只能检查某个属性或方法是否可以被对象访问 不能检查自己是否真正拥有这个属性或方法</p>
+
+    <script>
+        function People(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+        }
+        People.prototype.height = '175cm';
+        // 实例化
+        var xiaoming = new People('小明', 12, '男');
+        // 查找
+        console.log(xiaoming.height);
+        console.log(xiaoming);
+        // 测试三角关系
+        console.log(xiaoming.__proto__ == People.prototype);
+
+    </script>
+    <p>每次用new操作符创建的函数对象都是不同的地址 会造成浪费</p>
+    <p>把方法写在原型链上 内存更少 效果更好 代码更工整</p>
+
+    <p>Object.prototype 为原型链的终点 某原型的原型为Object 的原型</p>
+    <script>
+        function object() {
+        }
+        var xiaogang = new object();
+        console.log(xiaogang.__proto__.__proto__ === Object.prototype); //true
+        console.log(Object.prototype.__proto__);                        //null
+
+        console.log(Object.prototype.hasOwnProperty('hasOwnProperty')); //true
+        console.log(Object.prototype.hasOwnProperty('toString'));       //true
+    </script>
+
+    <p>关于数组的原型链 数组也有原型链 Array.prototype 定义在这上面的方法一样可以打点调用</p>
+    <p>其实所有定义的操作符 函数等都有其基本的原型</p>
+    <script>
+        var a = [11, 22, 33, 44];
+        console.log(a.__proto__ === Array.prototype);
+    </script>
+
+</body>
+
+</html>

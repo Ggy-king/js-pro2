@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td {
+            width: 20px;
+            height: 20px;
+            border: 1px solid black;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <p>var a = document.createElement('div') 创建孤儿节点 但并没进入dom中</p>
+        <p>父节点.appendChild(孤儿节点); 将孤儿节点放在父节点的内部最后一个</p>
+        <p>父节点.insertBefore(孤儿节点,标杆节点); 父内表标前</p>
+        <p>移动节点 同上 新父节点.appendChild(原父节点)</p>
+        <p>删除节点 父节点.removeChild(子节点)注意只能删除一个节点</p>
+        <p>克隆节点 var 孤儿节点 = 老节点.cloneNode() 括号中true为深克隆该节点所有后代子节点都被克隆 false只克隆该节点</p>
+    </div>
+
+    <table id="bale"></table>
+    <script>
+        var oBox = document.getElementById('box');
+        var oPs = document.getElementsByTagName('p');
+
+        var op = document.createElement('p');
+
+        op.innerText = '我是新来的';
+
+        // oBox.appendChild(op);
+        oBox.insertBefore(op, oPs[1]);
+
+        var able = document.getElementById('bale');
+
+        for (var i = 0; i < 20; i++) {
+            var tr = document.createElement('tr');
+            for (var j = 0; j < 12; j++) {
+                var td = document.createElement('td');
+                tr.appendChild(td);
+            }
+            able.appendChild(tr);
+        }
+
+    </script>
+
+
+
+
+</body>
+
+</html>

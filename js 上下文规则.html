@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>规则一 对象打点调用它的方法函数，则函数的上下文是这个打点的对象</p>
+    <p>规则二 圆括号直接调用函数，则函数的上下文是windows对象</p>
+    <p>规则三 数组（类数组对象）枚举出函数进行调用，上下文就是这个数组（类数组对象）
+        数组[下标]() 这一项巧了就是函数
+        类数组对象 所有键名为自然数序列（从零开始），且拥有length属性的对象
+        arguments对象是最常见的类数组对象，它是函数的实参列表
+    </p>
+    <p>规则四 iife中的函数，上下文是windows对象</p>
+    <p>规则五 定时器、延时器调用函数，上下文是windows对象</p>
+    <p>规则六 事件处理函数的上下文是绑定事件的Dom元素</p>
+    <p>规则七 call和aplly可以任意指定上下文</p>
+    <p>规则八 用new调用函数上下文为秘密创建出来的对象</p>
+    <p>用一个变量备份上下文 如 var self = this; 这个办法很巧妙 全局或局部都可以</p>
+
+</body>
+
+</html>

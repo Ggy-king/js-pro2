@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>this 是一个上下文函数 它可以代指某一东西</p>
+    <p>同一个函数用不同方法调用它 则函数的上下文不同</p>
+    <p>1 对象打点调用函数 函数中的this指代这个打点的对象</p>
+    <p>2 圆括号直接调用函数 函数中的this指代windows对象</p>
+    <p>函数的上下文必须调用才能有作用   一定要记住 只有上下文被调用后才能知道this指代什么</p>
+    <p>不是由定义在哪决定的而是由谁调用决定的</p>
+    <script>
+        var obj = {
+            a: 1,
+            b: 2,
+            fn: function () {
+                console.log(this.a + this.b);
+            }
+        }
+        obj.fn();
+        // var fn = obj.fn;
+        // fn();                     此时this变成windows
+    </script>
+
+</body>
+
+</html>

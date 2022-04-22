@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>冒泡排序</p>
+    <p>若有n个数字,则需要比较n-1趟,共比较n(n-1)/2次</p>
+
+    <script>
+        var arr = [6, 5, 3, 9, 1, 2, 8, 7];
+        for (var i = 1; i <= arr.length - 1; i++) {
+            for (var j = arr.length - 1; j >= i; j--) {
+                if (arr[j] < arr[j - 1]) {
+                    var temp = arr[j];
+                    arr[j] = arr[j - 1];
+                    arr[j - 1] = temp;
+                }
+            }
+            console.log(arr);
+        }
+        console.log(arr);
+    </script>
+
+</body>
+
+</html>

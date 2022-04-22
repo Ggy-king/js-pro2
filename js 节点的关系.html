@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <p>我是段落A</p>
+        <p id="para">我是段落B</p>
+        <p>我是段落C</p>
+    </div>
+
+    <script>
+        var box = document.getElementById('box');
+        var para = document.getElementById('para');
+
+        // 所有子节点
+        console.log(box.childNodes);
+        // 所有的元素子节点（IE9开始兼容）
+        console.log(box.children);
+        
+        // 第一个子节点
+        console.log(box.firstChild);
+        console.log(box.firstChild.nodeType);
+        // 第一个元素子节点（IE9开始兼容）
+        console.log(box.firstElementChild);
+        
+        // 最后一个子节点
+        console.log(box.lastChild);
+        console.log(box.lastChild.nodeType);
+        // 最后一个元素子节点（IE9开始兼容）
+        console.log(box.lastElementChild);
+
+        // 父节点
+        console.log(para.parentNode);
+        
+        // 前一个兄弟节点
+        console.log(para.previousSibling);
+        // 前一个元素兄弟节点（IE9开始兼容）
+        console.log(para.previousElementSibling);
+        
+        // 后一个兄弟节点
+        console.log(para.nextSibling);
+        // 后一个元素兄弟节点（IE9开始兼容）
+        console.log(para.nextElementSibling);
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>call和apply可以指定函数的上下文是什么</p>
+    <p>函数.call(上下文)</p>
+    <p>函数.apply(上下文)</p>
+    <p>区别就是开发场景不同 call传入函数的额外参数时只需要加逗号加参数即可 apply传入函数的参数时需要传入数组的形式</p>
+
+
+    <p>蓝图就是 类</p>
+    <p>具体就是 实例</p>
+    <p>如狗就是类 拉不拉多等是子类 小白就是实例</p>
+    <script>
+        // 构造函数
+        // 用new调用一个函数，这个函数就被称为构造函数，任何函数都可以是构造函数，我们只需要用new调用它
+        // 构造函数用来构造新对象 它内部语句将为新对象添加若干属性和方法 完成对象的初始化
+        // 构造函数必须用new关键字调用 因此开发者约定构造函数命名时首字母需要大写
+        function People(name, age, sex) {
+            this.name = name;
+            this.age = age;
+            this.sex = sex;
+            this.sayHello = function (name, age, sex) {
+                console.log('我是' + this.name + ',我今年' + this.age + '岁了');
+            };
+            this.saysex = function () {
+                console.log(this.name + '是' + this.sex + '生');
+            };
+        }
+        var xiaoming = new People('小明', 12, '男');
+        var xiaohao = new People('小红', 10, '女');
+        var xiaogang = new People('小刚', 13, '男');
+        // 如果直接用函数的方法调用 此时的上下文对象就是windows对象 三个语句最后一个会覆盖前几个语句 
+
+        xiaoming.sayHello();
+        xiaohao.saysex();
+        xiaogang.sayHello();
+        console.log(xiaoming);
+        console.log(xiaohao);
+        console.log(xiaogang);
+    </script>
+
+</body>
+
+</html>
