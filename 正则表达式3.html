@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .warning {
+        color: red;
+        display: none;
+    }
+</style>
+
+<body>
+    请输入中文名字
+    <input type="text" id="nameField">
+    <span class="warning" id="nameWarning">您输入的内容不合法</span>
+    <p>正则表达式的相关方法</p>
+    <p>test() 测试字符串 返回布尔值</p>
+    <p>exec() 在字符串中进行查找 返回数组或null</p>
+    <p>寻找连续的字符不要有开头与结尾</p>
+    <!-- g为全局查找 此时会变成有状态的 即查找完后不找已经找过的 继续直到null -->
+    <script>
+        var ss = '123adf456sdfsd798fgdf7789';
+        var result;
+        var regexp = /\d+/g;
+
+        while (result = regexp.exec(ss)) {
+            console.log(result);
+        }
+    </script>
+
+    <p>字符串与正则表达式的相关方法</p>
+    <p>1 search() 在字符串中根据正则表达式进行查找匹配，返回首次匹配到的位置索引，测试不到则返回-1</p>
+    <p>2 match() 在字符串中根据正则表达式进行匹配查找，返回一个数组，找不到则返回null</p>
+    <p>3 replace() 使用替换字符串替换掉匹配到的子字符串，可以使用正则表达式</p>
+    <p>4 split() 分隔字符串为数组，可以使用正则表达式</p>
+
+    <script>
+        var a = '132sdfs465fsef89';
+        console.log(a.search(/\d+/g));    //返回查找的第一个字符的下标位置
+        console.log(a.search(/\m/g));
+
+        console.log(a.match(/\d+/g));
+        console.log(a.match(/\m/g));
+
+        console.log(a.replace(/[a-z]+/g, '+'));      //加号表示贪婪的 尽可能多的连续的匹配
+        console.log(a.replace(/[a-z]/g, '+'));      //不加加号 就是对单个字符进行操作
+
+        console.log(a.split(/\d+/));     //这样写就是把数字当做分隔符来看
+    </script>
+
+    <script>
+        var onameField = document.getElementById('nameField');
+        var onameWarning = document.getElementById('nameWarning');
+
+        
+        //onblur 表示失去光标
+        onameField.onblur = function () {
+            var name = onameField.value;
+            
+            if(/^[\u4e00-\u9fa5]{2,6}$/.test(name)){
+                onameWarning.style.display = 'none';
+            }else {
+                onameWarning.style.display = 'inline';
+            }
+            
+        }
+    </script>
+</body>
+
+</html>

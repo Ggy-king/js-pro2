@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>正则表达式</p>
+    <p>描述了字符串的构成模式经常被用来检查字符串是否符合预定的规则</p>
+    <p>正则表达式是按位描述规则，是指它是一位一位的描述字符串的构成形式</p>
+    <p>/ / 定义正则表达式</p>
+    <p>/^ $/ ^定义开始 $定义结束</p>
+    <p>\d 表示数字</p>
+
+    <script>
+        // 6位数字的字符串
+        var regexp = /^\d{6}$/;
+
+        var a = '123456';
+        var b = '1234567';
+        var c = '123b45';
+
+        // test测试
+        console.log(regexp.test(a));
+        console.log(regexp.test(b));
+        console.log(regexp.test(c));
+
+    </script>
+
+</body>
+
+</html>

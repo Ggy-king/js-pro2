@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .content-part {
+            width: 1000px;
+            margin: 0px auto;
+            margin-bottom: 30px;
+            background-color: #ccc;
+            font-size: 50px;
+        }
+
+        .floornav {
+            position: fixed;
+            right: 40px;
+            top: 50%;
+            margin-top: -100px;
+            width: 120px;
+            height: 200px;
+            background-color: orange;
+        }
+
+        .floornav ul {
+            list-style: none;
+        }
+
+        .floornav ul li {
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 26px;
+            /* 小手指针 */
+            cursor: pointer;
+        }
+
+        .floornav ul li.current {
+            background: purple;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="floornav">
+        <ul id="list">
+            <li data-n="科技" class="current">科技</li>
+            <li data-n="体育">体育</li>
+            <li data-n="新闻">新闻</li>
+            <li data-n="娱乐">娱乐</li>
+            <li data-n="视频">视频</li>
+        </ul>
+    </nav>
+
+    <section class="content-part" style="height:674px;" data-n="科技">
+        科技栏目
+    </section>
+
+    <section class="content-part" style="height:567px;" data-n="体育">
+        体育栏目
+    </section>
+
+    <section class="content-part" style="height:739px;" data-n="新闻">
+        新闻栏目
+    </section>
+
+    <section class="content-part" style="height:574px;" data-n="娱乐">
+        娱乐栏目
+    </section>
+
+    <section class="content-part" style="height:1294px;" data-n="视频">
+        视频栏目
+    </section>
+
+    <script>
+        // 使用事件委托给li添加监听
+        var list = document.getElementById('list');
+        var contentParts = document.querySelectorAll('.content-part');
+        var lis = document.querySelectorAll('#list li');
+
+        list.onclick = function (e) {
+            if (e.target.tagName.toLowerCase() == 'li') {
+                // getAttribute表示得到标签身上的某个属性值
+                var n = e.target.getAttribute('data-n');
+
+                // 可以用属性选择器(就是方括号选择器)来寻找带有相同data-n的content-part
+                var contentPart = document.querySelector('.content-part[data-n=' + n + ']');
+
+                // 让页面的卷动自动成为这个盒子的offsetTop值
+                document.documentElement.scrollTop = contentPart.offsetTop;
+            }
+        }
+
+
+        // 在页面加载好之后，将所有的content-part盒子的offsetTop值推入数组
+        var offsetTopArr = [];
+        
+        // 遍历所有的contentPart，将它们的净位置推入数组
+        for (var i = 0; i < contentParts.length; i++) {
+            offsetTopArr.push(contentParts[i].offsetTop);
+        }
+        // 为了最后一项可以方便比较，我们可以推入一个无穷大
+        offsetTopArr.push(Infinity);
+
+        console.log(offsetTopArr);
+
+        // 当前所在楼层
+        var nowfloor = -1;
+
+        // 窗口的卷动
+        window.onscroll = function () {
+            // 得到当前的窗口卷动值
+            var scrollTop = document.documentElement.scrollTop;
+
+            // 遍历offsetTopArr数组，看看当前的scrollTop值在哪两个楼层之间
+            for (var i = 0; i < offsetTopArr.length; i++) {
+                if (scrollTop >= offsetTopArr[i] && scrollTop < offsetTopArr[i + 1]) {
+                    break;
+                }
+            }
+            // 退出循环的时候，i是几，就表示当前楼层是几
+            // 如果当前所在楼层，不是i，表示环楼了
+            if (nowfloor != i) {
+                console.log(i);
+                // 让全局变量改变为这个楼层号
+                nowfloor = i;
+
+                // 设置下标为i的项有cur
+                for (var j = 0; j < lis.length; j++) {
+                    if (j == i) {
+                        lis[j].className = 'current';
+                    } else {
+                        lis[j].className = '';
+                    }
+                }
+            }
+        };
+    </script>
+</body>
+
+</html>

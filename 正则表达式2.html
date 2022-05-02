@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <P>正则表达式的创建 /内容/ d的形式可以创建</P>
+    <P>还可以使用new RegExp('内容')的形式，创建正则表达式</P>
+    <P>使用typeof运算符检查正则表达式的类型，结果是object</P>
+
+    <script>
+        var regexp1 = /^\d{6}$/;
+        var regexp2 = new RegExp('^\\d{6}$');
+        // 这里反斜杠需要书写两个 转义
+        var str = 123456;
+        console.log(regexp1.test(str));
+        console.log(regexp2.test(str));
+    </script>
+    <p>元字符</p>
+    <p>\d 匹配一个数字</p>
+    <p>\D 匹配一个非数字</p>
+    <p>\w 匹配一个单字字符（字母，数字，或下划线）</p>
+    <p>\W 匹配一个非单字字符</p>
+    <p>\s 匹配一个空白字符，包括空格，制表符和换行符</p>
+    <p>. 任意字符</p>
+    <script>
+        // 如 abc-__ab-123 检索此字符串
+        var a = 'abc-__ab-123';
+        var regexp3 = /^\w\w\w-\w\w\w\w-\w\w\w$/;
+        console.log(regexp3.test(a));
+    </script>
+
+    <p>方括号表示法</p>
+    <p>[xyz]在方括号内表示匹配的字符 要么是x要么是y要么是z</p>
+    <p>\d == [0-9]</p>
+    <p>\D == [^0-9] ^表示否定</p>
+    <p>\w == [A-Za-z0-9_]</p>
+    <p>\W == [^A-Za-z0-9_]</p>
+    <script>
+        // 验证某字符串是否由四位小写字母 且最后一位不能是m字母组成
+        var b = 'asdm'
+        var c = 'asd2'
+        var d = 'asds'
+        // 注意^字符可以约束某一个字符但不是一个类型
+        // 方括号内不能又有否定又有非否定
+        console.log(/^[a-z]{3}[a-ln-z]$/.test(b));
+        console.log(/^[a-z]{3}[a-ln-z]$/.test(c));
+        console.log(/^[a-z]{3}[a-ln-z]$/.test(d));
+    </script>
+
+    <p>量词</p>
+    <p>* 匹配前一个表达式0次或多次 等价于{0,}</p>
+    <p>+ 匹配前一个表达式1次或多次 等价于{1,}</p>
+    <p>? 匹配前一个表达式0次或1次 等价于{0,1} 常用来判断或的关系</p>
+    <p>{n} n是一个正整数 匹配前面一个字符刚好出现了n次</p>
+    <p>{n,} n是一个正整数 匹配前面一个字符至少出现了n次</p>
+    <p>{n,m} n m都是正整数 匹配前面字符至少出现了n次 最多m次</p>
+    <script>
+        // 手机号码
+        console.log(/^1\d{10}$/.test('15942658610'));
+        // 网址
+        console.log(/^www\.\w+\.com(\.cn)?$/.test('www.cc264.com'));
+        console.log(/^www\.\w+\.com(\.cn)?$/.test('www.cc264.com.cn'));
+        console.log(/^www\.\w+\.com(\.cn)?$/.test('www.cc264.csp'));
+    </script>
+
+
+    <p>修饰符</p>
+    <p>修饰符也叫标志 用于使用正则表达式实现高级搜索</p>
+    <p>i 不区分大小写搜索</p>
+    <p>g 全局搜索</p>
+    <p>var re = /m/gi 两种写法不同</p>
+    <p>var re = new RegExp('m','gi')</p>
+</body>
+
+</html>
