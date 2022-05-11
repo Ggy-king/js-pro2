@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table,
+        th,
+        td {
+            border-collapse: collapse;
+            border: 1px solid darkblue;
+            text-align: center;
+        }
+
+        table {
+            width: 500px;
+            height: 200px;
+        }
+
+        thead {
+            background-color: rgb(14, 74, 114);
+        }
+
+        tbody {
+            background-color: #ccc;
+        }
+
+        tr:hover {
+            background-color: pink;
+        }
+
+        thead tr:hover {
+            background-color: rgb(14, 74, 114);
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    <input type="checkbox" name="" id="j_cbAll">
+                </th>
+                <td>商品</td>
+                <td>价钱</td>
+            </tr>
+        </thead>
+        <tbody id="j_tb">
+            <tr>
+                <th>
+                    <input type="checkbox" name="" id="">
+                </th>
+                <td>11</td>
+                <td>22</td>
+            </tr>
+            <tr>
+                <th>
+                    <input type="checkbox" name="" id="">
+                </th>
+                <td>33</td>
+                <td>44</td>
+            </tr>
+            <tr>
+                <th>
+                    <input type="checkbox" name="" id="">
+                </th>
+                <td>55</td>
+                <td>66</td>
+            </tr>
+            <tr>
+                <th>
+                    <input type="checkbox" name="" id="">
+                </th>
+                <td>77</td>
+                <td>88</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        var j_cbAll = document.getElementById('j_cbAll');
+        var j_tbs = document.getElementById('j_tb').getElementsByTagName('input');
+
+        j_cbAll.onclick = function () {
+            for (let i = 0; i < j_tbs.length; i++) {
+                j_tbs[i].checked = this.checked;
+
+            }
+        }
+
+        for (let i = 0; i < j_tbs.length; i++) {
+            j_tbs[i].onclick = function () {
+                var flag = true;
+                for (let j = 0; j < j_tbs.length; j++) {
+                    if (!j_tbs[j].checked) {
+                        flag = false;
+                        break;
+                    }
+
+                }
+                j_cbAll.checked = flag;
+
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

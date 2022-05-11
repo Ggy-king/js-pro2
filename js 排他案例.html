@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            display: flex;
+            list-style: none;
+            margin: auto;
+            margin-top: 100px;
+            width: 600px;
+        }
+
+        ul li {
+            flex: 1;
+            width: 40px;
+            height: 20px;
+            background-color: #ccc;
+            border: 1px solid black;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <script>
+        var oLi = document.querySelectorAll('ul li');
+
+        for (let i = 0; i < oLi.length; i++) {
+            oLi[i].onclick = function () {
+                for (let j = 0; j < oLi.length; j++) {
+                    oLi[j].style.backgroundColor = '';
+                }
+                this.style.backgroundColor = 'pink';
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>
