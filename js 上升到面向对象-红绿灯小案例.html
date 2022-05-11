@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #box img {
+            width: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="box"></div>
+
+    <script>
+        // 定义红绿灯类
+        function TrafficLight() {
+            // 颜色属性，一开始都是红色
+            // 红色1、黄色2、绿色3
+            this.color = 1;
+            // 调用自己的初始化方法
+            this.init();
+            // 绑定监听
+            this.bindEvent();
+        }
+        // 初始化方法
+        TrafficLight.prototype.init = function () {
+            // 创建自己的DOM
+            this.dom = document.createElement('img');
+            // 设置src属性
+            this.dom.src = '../image/' + this.color + '.jpg';
+            box.appendChild(this.dom);
+        };
+        // 绑定监听
+        TrafficLight.prototype.bindEvent = function () {
+            // 备份上下文，这里的this指的是JS的实例
+            var self = this;
+            // 当自己的dom被点击的时候
+            this.dom.onclick = function () {
+                // 当被点击的时候，调用自己的changeColor方法
+                self.changeColor();
+            };
+        }
+        // 改变颜色
+        TrafficLight.prototype.changeColor = function () {
+            // 改变自己的color属性，从而有一种“自治”的感觉，自己管理自己，不干扰别的红绿灯
+            this.color++;
+            if (this.color == 4) {
+                this.color = 1;
+            }
+            // 光color属性变化没有用，还要更改自己的dom的src属性
+            this.dom.src = '../image/' + this.color + '.jpg';
+        };
+
+        // 得到盒子
+        var box = document.getElementById('box');
+
+
+        // 实例化100个
+        var count = 100;
+
+        while (count--) {
+            new TrafficLight();
+        }
+
+    </script>
+
+</body>
+
+</html>

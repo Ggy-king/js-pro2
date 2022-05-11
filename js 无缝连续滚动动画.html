@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 1200px;
+            height: 130px;
+            border: 1px solid black;
+            margin: 100px auto;
+            overflow: hidden;
+        }
+
+        ul {
+            width: 5000px;
+            position: relative;
+
+        }
+
+        ul li {
+            float: left;
+            margin-right: 10px;
+            /* outline-style: none; */
+            list-style: none;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id='box'>
+        <ul id="list">
+            <li><img src="../图片储存/0.png" alt=""></li>
+            <li><img src="../图片储存/1.png" alt=""></li>
+            <li><img src="../图片储存/t2.png" alt=""></li>
+            <li><img src="../图片储存/3.png" alt=""></li>
+            <li><img src="../图片储存/4.png" alt=""></li>
+            <li><img src="../图片储存/5.png" alt=""></li>
+        </ul>
+
+    </div>
+    <script>
+        var obox = document.getElementById('box');
+        var olist = document.getElementById('list');
+
+        olist.innerHTML += olist.innerHTML;
+
+        var left = 0;
+
+        var timer;
+
+        move();
+
+        function move() {
+            clearInterval(timer);
+            timer = setInterval(function () {
+                left -= 4;
+                if (left <= -1260) {
+                    left = 0;
+                }
+
+                olist.style.left = left + 'px';
+            }, 20)
+
+        }
+
+
+        obox.onmouseenter = function () {
+            clearInterval(timer);
+        }
+        obox.onmouseleave = function () {
+            move();
+        }
+
+
+    </script>
+
+</body>
+
+</html>

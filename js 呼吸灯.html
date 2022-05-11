@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>呼吸灯</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            position: relative;
+            box-sizing: border-box;
+            width: 650px;
+            height: 360px;
+            border: 1px solid #ccc;
+            margin: 50px auto 0;
+
+
+        }
+
+        .box ul {
+            position: absolute;
+        }
+
+        .box ul li {
+            list-style: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            /* 所有的图片的透明度都是0 */
+            opacity: 0;
+            transition: opacity 1s linear 0s;
+
+        }
+
+        .box ul li:nth-child(1) {
+            /* 第一张透明度是一 */
+            opacity: 1;
+        }
+
+        .box .leftbtn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-20px);
+            left: 5px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: pink;
+        }
+
+        .box .rightbtn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-20px);
+            right: 5px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" id="box">
+        <ul class="list" id="list">
+            <li><img src="../图片储存/0.jpg" alt=""></li>
+            <li><img src="../图片储存/111.jpg" alt=""></li>
+            <li><img src="../图片储存/2.jpg" alt=""></li>
+            <li><img src="../图片储存/3.jpg" alt=""></li>
+            <li><img src="../图片储存/4.jpg" alt=""></li>
+        </ul>
+        <button class="leftbtn" id="leftbtn"></button>
+        <button class="rightbtn" id="rightbtn"></button>
+
+    </div>
+
+    <script>
+        var oBox = document.getElementById('box');
+        var oList = document.getElementById('list');
+        var oLeftbtn = document.getElementById('leftbtn');
+        var oRightbtn = document.getElementById('rightbtn');
+        var lis = oList.getElementsByTagName('li');
+
+        var i = 0;
+        var lock = true;
+
+        oRightbtn.onclick = function () {
+
+            if (!lock) return;
+            lock = false;
+
+            lis[i].style.opacity = 0;
+            i++;
+            if (i > 4) i = 0;
+            lis[i].style.opacity = 1;
+
+            setTimeout(function () {
+                lock = true;
+            }, 1000)
+        }
+        // 左按钮
+        oLeftbtn.onclick = function () {
+
+            if (!lock) return;
+            lock = false;
+
+            lis[i].style.opacity = 0;
+            i--;
+            if (i < 0) i = 4;
+            lis[i].style.opacity = 1;
+
+            setTimeout(function () {
+                lock = true;
+            }, 1000)
+        }
+
+    </script>
+
+</body>
