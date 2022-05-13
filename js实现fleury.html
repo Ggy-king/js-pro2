@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #ccc;
+        }
+
+        input {
+            outline: none;
+        }
+
+        p {
+            font-size: .48rem;
+            color: royalblue;
+        }
+
+        span {
+            font-size: .3733rem;
+            color: red;
+        }
+
+        .bu {
+            margin-top: 3.3333rem;
+        }
+
+        .c {
+            margin-left: .2667rem;
+            height: 25px;
+        }
+
+        li {
+            margin-top: .1067rem;
+        }
+
+        .as {
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+    <p>确实没有难度</p>
+
+    <span>这里把路径都用数字表示，注意是以两个为单位坐标形式显示</span><br><br>
+    <span>输入矩阵，横排每个数字不要用空格隔开，一行完之后点确定，老师千万不要乱写，不然会有惊喜</span><br><br>
+    <div id="a">
+        <input class="input-box" type="text"><input type="button" value="确定" onclick="getInputVal()" class="c" id="c">
+        <ul id="ul" class="content">
+        </ul>
+    </div>
+    <button class="bu" id="d">提交</button><span class="as">（做完之后不要第二次提交 请刷新页面 我挺累的）</span>
+
+</body>
+<script>
+    // 回车
+    let d;
+    function getInputVal() {
+        const inputBox = document.querySelectorAll('.input-box')[0];
+        content = document.querySelectorAll('.content')[0];
+        // 获取input输入框中的值
+        d = inputBox.value;
+        // if (d) {
+        //     content.innerHTML = d;
+        // }
+    };
+    getInputVal();
+
+    const a = document.getElementById('a');
+    const b = document.getElementById('b');
+    const c = document.getElementById('c');
+    const ul = document.getElementById('ul');
+    var d2 = document.getElementById('d');
+
+
+    // 按钮
+    document.onkeydown = function (e) {
+        var theEvent = window.event || e;
+        var code = theEvent.keyCode || theEvent.which;
+        if (code == 13) {
+            alert("那么大个确定按钮不按，非得敲回车？");
+            return false;
+        }
+
+    };
+
+
+    c.addEventListener('click', function () {
+        if (/^[a-zA-Z]/.test(d)) {
+            alert('逻辑矩阵有英文吗就输入英文,删了重写');
+            d = '';
+        } else if (/^[\u4e00-\u9fa5]/.test(d)) {
+            alert('哦，好猖狂啊中文都敢往里写');
+            d = '';
+        } else if (/^\s*$/.test(d)) {
+            alert('啥玩意没写还想确定？？？');
+            d = '';
+        } else if (/\s/.test(d)) {
+            alert('为什么又不审题，谁允许有空格了？');
+            d = '';
+        } else if (!(/^0[10]*$|^1[10]*$/.test(d))) {
+            alert('逻辑逻辑 除了1或0还能有别的？');
+            d = '';
+        } else {
+            ul.innerHTML += `<li>${d}</li>`;
+        }
+        console.log(d);
+    });
+
+
+
+
+    // 矩阵
+    var all = ul.children;
+    var panduan;
+    var bian = new Array();
+    // 判断
+    function Pp(tArray, all) {
+        for (let i = 0; i < all.length - 1; i++) {
+            for (let j = 0; j < all.length - 1; j++) {
+                if (tArray[i][j] == 1) {
+                    if (tArray[i][j] == tArray[j][i]) {
+                        tArray[i][j] = tArray[j][i] = 0;
+                    } else {
+                        return false;
+                    }
+                }
+
+            }
+
+        }
+        return true;
+    };
+
+    function Ppo(tArray, all) {
+        for (let i = 0; i < all.length - 1; i++) {
+            for (let j = 0; j < all.length - 1; j++) {
+                if (tArray[i][j] == 1) {
+                    if (tArray[i][j] == tArray[j][i]) {
+                        bian.push(i + 1, j + 1);
+                        tArray[i][j] = tArray[j][i] = 0;
+                        continue;
+                    }
+                }
+
+            }
+
+        }
+        return bian;
+    };
+    function arr(n) {
+        var result = [];
+        for (var i = 0; i < n.length; i++) {
+            if (Array.isArray(n[i])) {
+                result.push(arr(n[i]));
+            } else {
+                result.push(n[i]);
+            }
+        }
+        return result;
+    }
+
+
+    // 事件
+    d2.addEventListener('click', function () {
+        console.log(all.length);
+        for (var i = 0; i < all.length; i++) {
+            var ss = (all.length !== all[0].textContent.length);
+            if (ss == 1) {
+                panduan = 1;
+            } else {
+                panduan = 0;
+            }
+        }
+
+        if (panduan) {
+            alert('怎么这矩阵还横竖个数不相等呢,刷新重写吧，太晚了不做删除按钮了')
+        } else if (/^\s*$/.test(d)) {
+            alert('啥玩意没写还想提交？？？');
+        } else {
+            alert('您终于输入了一个正常的矩阵了!');
+
+            var tArray = new Array();
+            for (var k = 0; k < all.length; k++) {
+
+                tArray[k] = new Array();
+
+                for (var j = 0; j < all.length; j++) {
+                    var e = all[k].textContent[j];
+                    tArray[k][j] = +e;
+                }
+            }
+            console.log(tArray);
+            // 深克隆一下
+            var sArray = arr(tArray);
+            // 原数组
+            ul.innerHTML += `您输入的矩阵为：<li>[${tArray}]  （就不用二维数组表示了）</li>`;
+            var th = 0;
+            for (var k = 0; k < all.length - 1; k++) {
+
+                for (var j = 0; j < all.length - 1; j++) {
+                    // console.log(tArray[k][j]);
+                    th += tArray[k][j];
+                }
+            }
+            console.log('th' + th);
+
+
+            var z = Pp(tArray, all);
+            var zz = Ppo(sArray, all);
+            console.log(zz);
+            console.log('z' + z);
+            if (th % 2 !== 0) {
+                ul.innerHTML += `根据运算，您输入的矩阵并不可以构成欧拉回路`;
+            } else {
+                // 最后表达
+                if (z) {
+                    ul.innerHTML += `根据运算，您输入的矩阵可以构成欧拉回路，欧拉回路的路径为：${zz} （这里是坐标形式）<br>
+                成功了哦（详细运算可以打开设置台查看）<br>`;
+                } else {
+                    ul.innerHTML += `根据运算，您输入的矩阵并不可以构成欧拉回路`;
+                }
+            }
+        }
+
+    })
+
+
+
+</script>
+
+
+</html>
