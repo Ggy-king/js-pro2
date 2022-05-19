@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #ccc;
+        }
+
+        input {
+            outline: none;
+        }
+
+        p {
+            font-size: .48rem;
+            color: royalblue;
+        }
+
+        span {
+            font-size: .3733rem;
+            color: red;
+        }
+
+        .bu {
+            margin-top: 3.3333rem;
+        }
+
+        .sure {
+            margin-left: .2667rem;
+            height: 25px;
+        }
+
+        li {
+            margin-top: .1067rem;
+        }
+
+        .as {
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <p>确实没有难度</p>
+
+    <span>这里把路径都用数字表示，注意是以两个为单位坐标形式显示</span><br><br>
+    <span>输入矩阵，横排每个数字不要用空格隔开，一行完之后点确定，老师千万不要乱写，不然会有惊喜</span><br><br>
+    <div id="main">
+        <input class="input-box" type="text"><input type="button" value="确定" onclick="getInputVal()" class="sure"
+            id="sure">
+        <ul id="con" class="content">
+        </ul>
+    </div>
+    <button class="bu" id="d">提交</button><span class="as">（做完之后不要第二次提交 请刷新页面 我挺累的）</span>
+    <script>
+        const main = document.getElementById('main');
+        const sure = document.getElementById('sure');
+        const con = document.getElementById('con');
+        let d;
+        function getInputVal() {
+            const inputBox = document.querySelectorAll('.input-box')[0];
+            content = document.querySelectorAll('.content')[0];
+            // 获取input输入框中的值
+            d = inputBox.value;
+        };
+        getInputVal();
+
+
+
+
+        // 按钮
+        document.onkeydown = function (e) {
+            var theEvent = window.event || e;
+            var code = theEvent.keyCode || theEvent.which;
+            if (code == 13) {
+                alert("那么大个确定按钮不按，非得敲回车？");
+                return false;
+            }
+
+        };
+
+
+        sure.addEventListener('click', function () {
+            if (/^[a-zA-Z]/.test(d)) {
+                alert('逻辑矩阵有英文吗就输入英文,删了重写');
+                d = '';
+            } else if (/^[\u4e00-\u9fa5]/.test(d)) {
+                alert('哦，好猖狂啊中文都敢往里写');
+                d = '';
+            } else if (/^\s*$/.test(d)) {
+                alert('啥玩意没写还想确定？？？');
+                d = '';
+            } else if (/\s/.test(d)) {
+                alert('为什么又不审题，谁允许有空格了？');
+                d = '';
+            } else if (!(/^0[10]*$|^1[10]*$/.test(d))) {
+                alert('逻辑逻辑 除了1或0还能有别的？');
+                d = '';
+            } else {
+                ul.innerHTML += `<li>${d}</li>`;
+            }
+        });
+
+
+
+
+        
+        
+
+    </script>
+</body>
+
+</html>
